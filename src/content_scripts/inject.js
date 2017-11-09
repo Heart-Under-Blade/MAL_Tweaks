@@ -7,23 +7,21 @@
     var ri = 21;
     
     var row = listItems[ri].getElementsByClassName("list-table-data")[0];
+    
+    var titleList = table.getElementsByClassName("data title clearfix");
+    var listedTitles = [];
+    
+    for (var d = 0; d < titleList.length; d++) {
+        listedTitles.push(titleList[d].firstChild.toString());
+    }
+    
+    var iRow = table.insertRow(ri+1);
+    var cell1 = iRow.insertCell(0);
+    var cell2 = iRow.insertCell(1);
+    cell1.innerHTML = "N";
+    
+    // cell2.innerHTML = listedTitles.length;
     // row.style.display = 'none';
-    
-    // var http = new XMLHttpRequest();
-    // var url = "https://myanimelist.net/api/account/verify_credentials.xml";
-    // var params = "u=radimir_kun:war40war";
-    // http.open("GET", url+"?"+params, false);
-    // http.send( null );
-    
-    // var iRow = table.insertRow(ri+1);
-    // var cell1 = iRow.insertCell(0);
-    // var cell2 = iRow.insertCell(1);
-    // cell1.innerHTML = listItems.length;
-    //iRow = listItems[ri];
-    
-    // var tmp = listItems[0].innerHTML;
-    // listItems[0].innerHTML = listItems[1].innerHTML;
-    // listItems[1].innerHTML = tmp;
     
     //ExchangeTitleRows(0, 1);
     InsertTitleLinks(row);
@@ -43,11 +41,6 @@
         
         var http = new XMLHttpRequest();
         var url = row.cells[2].getElementsByTagName('a')[0];
-        
-        var iRow = table.insertRow(ri+1);
-        var cell1 = iRow.insertCell(0);
-        var cell2 = iRow.insertCell(1);
-        cell1.innerHTML = "N";
         
         var titles = [];
         GetRelatedTitiles(url, titles);
@@ -83,7 +76,7 @@
                         for (var j = 0; j < titleLinks.length; j++) {
                             var tl = titleLinks[j].toString();
                             
-                            if (titles.indexOf(tl) == -1) {
+                            if (titles.indexOf(tl) == -1 && listedTitles.indexOf(tl) != -1) {
                                 titles.push(tl);
                                 
                                 if (type != "Other:") { // others are only put in 'titles'
