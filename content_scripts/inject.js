@@ -48,7 +48,6 @@
         var cell1 = iRow.insertCell(0);
         var cell2 = iRow.insertCell(1);
         cell1.innerHTML = "N";
-        //https://myanimelist.net/
         
         var titles = [];
         GetRelatedTitiles(url, titles);
@@ -66,19 +65,19 @@
                 http.open("GET", tUrl, false);
                 http.send(null);
                 
-                /// extract links
+                // extract table with links
                 var response = http.responseText;
                 var tempDiv = document.createElement('div');
                 tempDiv.innerHTML = response.replace(/<script(.|\s)*?\/script>/g, '');
-                var rels = tempDiv.getElementsByClassName('anime_detail_related_anime')[0];
+                var tableR = tempDiv.getElementsByClassName('anime_detail_related_anime')[0];
                 
-                for (var i = 0; i < rels.rows.length; i++)
-                {
-                    var row1 = rels.rows[i];
+                var len = tableR.rows.length;
+                
+                for (var i = 0; i < len; i++) {
+                    var row1 = tableR.rows[i];
                     var type = row1.cells[0].textContent;
                     
-                    if (type != "Adaptation:" && type != "Character:")
-                    {
+                    if (type != "Adaptation:" && type != "Character:") { // do not parse these types because of interactions with other franchises
                         var titleLinks = row1.getElementsByTagName('a');
                 
                         for (var j = 0; j < titleLinks.length; j++) {
@@ -86,7 +85,10 @@
                             
                             if (titles.indexOf(tl) == -1) {
                                 titles.push(tl);
-                                stack.push(tl);
+                                
+                                if (type != "Other:") { // others are only put in 'titles'
+                                    stack.push(tl);
+                                }
                             }
                         }
                     }
