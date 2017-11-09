@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+
+  "name": "FranchiseMAL",
+  "description": "Make your anime list compact by uniting titles to franchises. It is unofficial extention for myanimelist.net",
+  "version": "1.0",
+
+  "content_scripts": [
+    {
+      "matches": ["*://myanimelist.net/animelist*"],
+      "js": ["content_scripts/inject.js"]
+    }
+  ]
+}
