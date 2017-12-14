@@ -1,10 +1,10 @@
-(function () {
+(/*window.onload = */function () {
     var tables = document.getElementsByClassName("list-table")
     
     var table = tables[0];
     var listItems = table.getElementsByClassName("list-item");
     
-    var ri = 21;
+    var ri = 23;
     
     var row = listItems[ri].getElementsByClassName("list-table-data")[0];
     
@@ -20,7 +20,7 @@
     var cell2 = iRow.insertCell(1);
     cell1.innerHTML = "N";
     
-    // cell2.innerHTML = listedTitles.length;
+    cell2.innerHTML = listedTitles.length;
     // row.style.display = 'none';
     
     //ExchangeTitleRows(0, 1);
@@ -91,9 +91,9 @@
         
         var rel = '';
         
-        for (var i = 0; i < titles.length; i++)
+        for (var i = 0; i < /*listedTitles*/titles.length; i++)
         {
-            rel += titles[i] + ', ';
+            rel += /*listedTitles*/titles[i] + ', ';
         }
         
         cell2.innerHTML = rel;//http.responseText;
